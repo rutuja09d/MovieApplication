@@ -1,5 +1,8 @@
 package com.movie.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.movie.model.Movie;
 import com.movie.service.MovieService;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 @RestController
@@ -42,4 +46,17 @@ public class MovieController {
         return ResponseEntity.ok(movie);
     }
 
+    private List<Movie> movieList = new ArrayList<>();
+
+    @PostConstruct
+    public void init() {
+    	movieList.add(new Movie(1, "Inception", "Sci-Fi movie","sci-fi"));
+        movieList.add(new Movie(2, "Interstellar", "Sci-Fi movie","sci-fi"));
+        movieList.add(new Movie(3, "Avengers", "Action movie","Action"));
+    }
+
+    @GetMapping
+    public List<Movie> getAllMovies() {
+        return movieList;
+    }
 }
