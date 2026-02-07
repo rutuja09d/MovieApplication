@@ -21,6 +21,11 @@ public class MovieController {
 	@Autowired
 	private MovieService movieService;
 	
+	@GetMapping("/")
+    public String home() {
+        return "Movie API is running successfully";
+    }
+	
 	// Add new movie
     @PostMapping("/add")
     public ResponseEntity<Movie> addMovie(@Valid @RequestBody Movie movie) {
